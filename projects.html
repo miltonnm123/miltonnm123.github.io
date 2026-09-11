@@ -1,0 +1,436 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="description" content="Milton Nyberg — detailed game programming projects.">
+  <title>Projects // Milton Nyberg</title>
+  <link rel="stylesheet" href="style.css">
+</head>
+<body class="projects-page">
+  <header class="simple-header">
+    <a class="brand" href="index.html">MILTON NYBERG<span>_</span></a>
+    <nav class="top-nav">
+      <a class="nav-button" href="index.html">HOME</a>
+      <a class="nav-button active" href="projects.html">PROJECTS</a>
+    </nav>
+  </header>
+
+  <main>
+    <section class="detail-hero">
+      <p class="eyebrow">&gt;_ PROJECT ARCHIVE</p>
+      <h1>PROJECTS</h1>
+      <p>
+        Detailed breakdowns of my projects, including what I worked on,
+        the development process, technical challenges, decisions and what I learned.
+      </p>
+    </section>
+
+    <section class="detail-list">
+      
+      <article class="detail-project" id="project-01">
+        <div class="detail-header">
+          <p class="project-id">PROJECT_01</p>
+          <h2>Frosthaul</h2>
+          <div class="detail-links">
+            <a href="#">VIEW ON GITHUB &gt;</a>
+            <a href="https://futuregames.itch.io/frosthaul">PLAY ON ITCH.IO &gt;</a>
+          </div>
+        </div>
+
+        <div class="detail-media placeholder">
+            <img class="project-page-image" src="images/Frosthaul_Frontpage.png" alt="Frosthaul" />
+        </div>
+
+        <div class="detail-body">
+          <section>
+            <h3>// OVERVIEW</h3>
+            <p>
+                Frosthaul was developed over seven weeks as the third group project during my studies at Futuregames. Our team consisted of 11 people: four designers, three artists, two programmers, one composer, and one producer.
+            </p>
+            <p>
+                My role was programming, and since there were only two programmers on the team, we both worked across most areas of the game's programming. My main focus, however, was on gameplay systems, profiling and optimization using Unreal Insights.
+            </p>
+            <p>The project came with a few restrictions, including some form of multiplayer and the theme "You Had One Job." For the multiplayer requirement, we decided to implement online multiplayer using Steam's networking services. We interpreted the theme by putting the players in the role of train conductors with one simple job: deliver cargo. The challenge comes from the various gameplay systems and problems that make completing that seemingly simple task increasingly difficult.</p>
+          </section>
+
+          <section>
+              <h3>// MY CONTRIBUTION AND TECHNICAL DETAILS</h3>
+
+              <h4>Gameplay & Interaction Systems</h4>
+
+              <p>
+                  One of the main areas I worked on was the game's item and interaction systems,
+                  particularly how tools interact with malfunctions such as hull breaches and fires.
+              </p>
+
+              <p>
+                  Both fires and hull breaches used an interaction system where progress was made while
+                  the correct tool was being used. Hull breaches required a welding torch and sheet metal,
+                  while fires required a fire extinguisher. Once the interaction progress was completed,
+                  an <code>OnCompleted</code> function handled the resulting gameplay effects.
+              </p>
+
+              <p>
+                  These systems also exposed events that designers could use to implement additional
+                  behaviour without modifying the underlying interaction code. For example, extinguishing
+                  a fire could broadcast an event that other systems could respond to.
+              </p>
+
+              <p>
+                  Hull breaches required some additional handling because they were pre-placed along the
+                  train walls rather than spawned dynamically. They could be enabled and disabled as needed,
+                  resetting their interaction state whenever they became active. Repairing a breach also
+                  required attaching a sheet-metal item to it, which was consumed once the repair was completed.
+              </p>
+
+              <p>
+                  Both systems communicated with the GameMode to affect the overall state of the train.
+                  Fires affected the train's movement, while hull breaches contributed to the temperature
+                  system and could eventually cause the players to freeze if they were not repaired.
+              </p>
+
+
+              <h4>Procedural Fire Placement</h4>
+
+              <p>
+                  Unlike hull breaches, fires were spawned dynamically. I created a system using spawn
+                  areas placed along the train's ceiling pipes to generate fires at valid positions.
+              </p>
+
+              <p>
+                  When a spawn area was activated, the system selected a random point along the pipe and
+                  generated several nearby positions. Raycasts were then performed at randomized angles
+                  to locate the pipe's surface. A fire could then be spawned at the resulting hit position
+                  and oriented using the direction of the raycast.
+              </p>
+
+              <p>
+                  The same approach was also used when fires spread, allowing additional fires to appear
+                  around an existing fire while remaining correctly positioned on the pipe geometry.
+              </p>
+
+
+              <h4>Malfunction System</h4>
+
+              <p>
+                  Together with the other programmer, I worked on the system responsible for triggering
+                  malfunctions throughout a run.
+              </p>
+
+              <p>
+                  The GameMode periodically selected a malfunction after a randomized interval. Depending
+                  on the selected malfunction, the system could activate a fire spawn area or enable one
+                  or multiple hull breaches. This tied the individual fire and breach systems into the
+                  larger gameplay loop.
+              </p>
+
+
+              <h4>Multiplayer & QA</h4>
+
+              <p>
+                  Since Frosthaul was an online multiplayer project, I also worked with Unreal Engine's
+                  networking and replication systems to ensure important gameplay states remained
+                  synchronized between the host and client.
+              </p>
+
+              <p>
+                  Throughout development I also spent significant time testing the game, identifying bugs,
+                  debugging gameplay systems, and fixing issues discovered during both internal testing
+                  and playtests.
+              </p>
+
+          </section>
+
+          <section>
+            <h3>// PROCESS &amp; PROBLEM SOLVING</h3>
+            <p>
+                Work in progress.....
+            </p>
+          </section>
+
+          <div class="inline-media-grid">
+            <div class="inline-media placeholder"><span>SCREENSHOT / DIAGRAM</span></div>
+            <div class="inline-media placeholder"><span>SCREENSHOT / DIAGRAM</span></div>
+          </div>
+
+          <section>
+            <h3>// WHAT I LEARNED</h3>
+            <p>
+                Work in progress.....
+            </p>
+          </section>
+        </div>
+      </article>
+    
+      <article class="detail-project" id="project-02">
+        <div class="detail-header">
+          <p class="project-id">PROJECT_02</p>
+          <h2>PROJECT TITLE 2</h2>
+          <div class="detail-links">
+            <a href="#">VIEW ON GITHUB &gt;</a>
+            <a href="#">PLAY ON ITCH.IO &gt;</a>
+          </div>
+        </div>
+
+        <div class="detail-media placeholder">
+          <span>LARGE PROJECT IMAGE / VIDEO / GIF</span>
+        </div>
+
+        <div class="detail-body">
+          <section>
+            <h3>// OVERVIEW</h3>
+            <p>
+                Work in progress.....
+            </p>
+          </section>
+
+          <section>
+            <h3>// MY CONTRIBUTION AND TECHNICAL DETAILS</h3>
+            <p>
+                Work in progress.....
+            </p>
+
+          </section>
+
+          <section>
+            <h3>// PROCESS &amp; PROBLEM SOLVING</h3>
+            <p>
+                Work in progress.....
+            </p>
+          </section>
+
+          <div class="inline-media-grid">
+            <div class="inline-media placeholder"><span>SCREENSHOT / DIAGRAM</span></div>
+            <div class="inline-media placeholder"><span>SCREENSHOT / DIAGRAM</span></div>
+          </div>
+
+
+
+          <section>
+            <h3>// WHAT I LEARNED</h3>
+            <p>
+                Work in progress.....
+            </p>
+          </section>
+        </div>
+      </article>
+    
+      <article class="detail-project" id="project-03">
+        <div class="detail-header">
+          <p class="project-id">PROJECT_03</p>
+          <h2>PROJECT TITLE 3</h2>
+          <div class="detail-links">
+            <a href="#">VIEW ON GITHUB &gt;</a>
+            <a href="#">PLAY ON ITCH.IO &gt;</a>
+          </div>
+        </div>
+
+        <div class="detail-media placeholder">
+          <span>LARGE PROJECT IMAGE / VIDEO / GIF</span>
+        </div>
+
+        <div class="detail-body">
+          <section>
+            <h3>// OVERVIEW</h3>
+            <p>
+                Work in progress.....
+            </p>
+
+          </section>
+
+          <section>
+              <h3>// MY CONTRIBUTION AND TECHNICAL DETAILS</h3>
+              <p>
+                  Work in progress.....
+              </p>
+
+          </section>
+
+          <section>
+            <h3>// PROCESS &amp; PROBLEM SOLVING</h3>
+            <p>
+                Work in progress.....
+            </p>
+          </section>
+
+          <div class="inline-media-grid">
+            <div class="inline-media placeholder"><span>SCREENSHOT / DIAGRAM</span></div>
+            <div class="inline-media placeholder"><span>SCREENSHOT / DIAGRAM</span></div>
+          </div>
+
+          <section>
+            <h3>// WHAT I LEARNED</h3>
+            <p>
+                Work in progress.....
+            </p>
+          </section>
+        </div>
+      </article>
+    
+      <article class="detail-project" id="project-04">
+        <div class="detail-header">
+          <p class="project-id">PROJECT_04</p>
+          <h2>PROJECT TITLE 4</h2>
+          <div class="detail-links">
+            <a href="#">VIEW ON GITHUB &gt;</a>
+            <a href="#">PLAY ON ITCH.IO &gt;</a>
+          </div>
+        </div>
+
+        <div class="detail-media placeholder">
+          <span>LARGE PROJECT IMAGE / VIDEO / GIF</span>
+        </div>
+
+        <div class="detail-body">
+          <section>
+            <h3>// OVERVIEW</h3>
+            <p>
+                Work in progress.....
+            </p>
+
+          </section>
+
+          <section>
+              <h3>// MY CONTRIBUTION AND TECHNICAL DETAILS</h3>
+              <p>
+                  Work in progress.....
+              </p>
+
+          </section>
+
+          <section>
+            <h3>// PROCESS &amp; PROBLEM SOLVING</h3>
+            <p>
+                Work in progress.....
+            </p>
+          </section>
+
+          <div class="inline-media-grid">
+            <div class="inline-media placeholder"><span>SCREENSHOT / DIAGRAM</span></div>
+            <div class="inline-media placeholder"><span>SCREENSHOT / DIAGRAM</span></div>
+          </div>
+
+          <section>
+            <h3>// WHAT I LEARNED</h3>
+            <p>
+                Work in progress.....
+            </p>
+          </section>
+        </div>
+      </article>
+    
+      <article class="detail-project" id="project-05">
+        <div class="detail-header">
+          <p class="project-id">PROJECT_05</p>
+          <h2>PROJECT TITLE 5</h2>
+          <div class="detail-links">
+            <a href="#">VIEW ON GITHUB &gt;</a>
+            <a href="#">PLAY ON ITCH.IO &gt;</a>
+          </div>
+        </div>
+
+        <div class="detail-media placeholder">
+          <span>LARGE PROJECT IMAGE / VIDEO / GIF</span>
+        </div>
+
+        <div class="detail-body">
+          <section>
+            <h3>// OVERVIEW</h3>
+            <p>
+                Work in progress.....
+            </p>
+
+          </section>
+
+          <section>
+              <h3>// MY CONTRIBUTION AND TECHNICAL DETAILS</h3>
+              <p>
+                  Work in progress.....
+              </p>
+
+          </section>
+
+          <section>
+            <h3>// PROCESS &amp; PROBLEM SOLVING</h3>
+            <p>
+                Work in progress.....
+            </p>
+          </section>
+
+          <div class="inline-media-grid">
+            <div class="inline-media placeholder"><span>SCREENSHOT / DIAGRAM</span></div>
+            <div class="inline-media placeholder"><span>SCREENSHOT / DIAGRAM</span></div>
+          </div>
+
+
+          <section>
+            <h3>// WHAT I LEARNED</h3>
+            <p>
+                Work in progress.....
+            </p>
+          </section>
+        </div>
+      </article>
+    
+      <article class="detail-project" id="project-06">
+        <div class="detail-header">
+          <p class="project-id">PROJECT_06</p>
+          <h2>PROJECT TITLE 6</h2>
+          <div class="detail-links">
+            <a href="#">VIEW ON GITHUB &gt;</a>
+            <a href="#">PLAY ON ITCH.IO &gt;</a>
+          </div>
+        </div>
+
+        <div class="detail-media placeholder">
+          <span>LARGE PROJECT IMAGE / VIDEO / GIF</span>
+        </div>
+
+        <div class="detail-body">
+          <section>
+            <h3>// OVERVIEW</h3>
+            <p>
+                Work in progress.....
+            </p>
+
+          </section>
+
+          <section>
+              <h3>// MY CONTRIBUTION AND TECHNICAL DETAILS</h3>
+              <p>
+                  Work in progress.....
+              </p>
+
+          </section>
+
+          <section>
+            <h3>// PROCESS &amp; PROBLEM SOLVING</h3>
+            <p>
+                Work in progress.....
+            </p>
+          </section>
+
+          <div class="inline-media-grid">
+            <div class="inline-media placeholder"><span>SCREENSHOT / DIAGRAM</span></div>
+            <div class="inline-media placeholder"><span>SCREENSHOT / DIAGRAM</span></div>
+          </div>
+
+          <section>
+            <h3>// WHAT I LEARNED</h3>
+            <p>
+                Work in progress.....
+            </p>
+          </section>
+        </div>
+      </article>
+    
+    </section>
+  </main>
+
+  <footer>
+    <span>MILTON NYBERG // PROJECT ARCHIVE</span>
+    <a href="index.html">RETURN HOME_</a>
+  </footer>
+</body>
+</html>
